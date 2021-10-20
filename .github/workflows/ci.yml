@@ -31,3 +31,29 @@ jobs:
         with:
           name: apk-release
           path: build/app/outputs/flutter-apk/app-release.apk
+
+ deployProd:
+    name: 'Deploy to production environment'
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-java@v1
+        with:
+          java-version: '12.x'
+      - uses: SpicyPizza/create-envfile@v1
+        with:
+          envkey_ENVIRONMENT: ${{ secrets.ENVIRONMENT }}
+          envkey_API_URL: ${{ secrets.API_URL }}
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: 'stable'
+          flutter-version: '2.5.x'
+      - run: flutter pub get
+      - run: flutter clean
+      - run: flutter build apk
+      - uses: actions/upload-artifact@v1
+        with:
+          name: apk-release
+          path: build/app/outputs/flutter-apk/app-release.apk
