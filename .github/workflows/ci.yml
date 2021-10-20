@@ -8,6 +8,7 @@ on:
 jobs:
   deployDev:
     name: 'Deploy to dev environment'
+    if: github.event.ref == 'refs/heads/dev'
     runs-on: ubuntu-latest
     environment:
       name: development
@@ -34,6 +35,7 @@ jobs:
 
   deployProd:
     name: 'Deploy to production environment'
+    if: github.event.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     environment:
       name: production
