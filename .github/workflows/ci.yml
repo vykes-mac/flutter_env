@@ -32,7 +32,7 @@ jobs:
           name: apk-release
           path: build/app/outputs/flutter-apk/app-release.apk
 
- deployProd:
+  deployProd:
     name: 'Deploy to production environment'
     runs-on: ubuntu-latest
     environment:
