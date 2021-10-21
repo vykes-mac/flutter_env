@@ -2,8 +2,6 @@ name: deployments
 on:
   push:
     branches: [master, staging, dev]
-  pull_request:
-    branches: [master, staging, dev]
 
 jobs:
   deployDev:
